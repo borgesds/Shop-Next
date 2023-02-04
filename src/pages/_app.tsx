@@ -14,8 +14,8 @@ export default function App({ Component, pageProps }: AppProps) {
         <Image 
           src={logoImg.src} 
           alt="" 
-          width={40}
-          height={40}
+          width={50}
+          height={50}
         />
       </Header>
       <Component {...pageProps} />
