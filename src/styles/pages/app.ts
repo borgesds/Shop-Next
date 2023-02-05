@@ -15,6 +15,11 @@ export const Header = styled('header', {
     margin: '0 auto',
 })
 
-export const Img = styled('div', {
-    color: '$gray100',
+export const Logo = styled('div', {
+    display: 'flex',
+    alignItems: 'center',
+
+    span: {
+        fontWeight: 'bold',
+    }
 })
