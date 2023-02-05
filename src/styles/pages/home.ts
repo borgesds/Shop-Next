@@ -15,6 +15,7 @@ export const Product = styled('a', {
     padding: '0.25rem',
     cursor: 'pointer',
     position: 'relative',
+    overflow: 'hidden', /* complementa o footer e hover */
 
     display: 'flex',
     alignItems: 'center',
@@ -39,8 +40,27 @@ export const Product = styled('a', {
 
         backgroundColor: 'rgba(0, 0, 0, 0.6)',
 
+        /* esconder o footer */
+        transform: 'translateY(110%)',
+        opacity: 0,
+        transition: 'all 0.2s ease-in-out',
+
         strong: {
-            fontSize: '1.5rem',
+            fontSize: '$lg',
+        },
+
+        span: {
+            fontSize: '$xl',
+            fontWeight: 'bold',
+            color: '$green300'
         }
-    }
+    },
+
+    /* visualizar o footer */
+    '&:hover': {
+        footer: {
+            transform: 'translateY(0)',
+            opacity: 1,
+        }
+    },
 })
