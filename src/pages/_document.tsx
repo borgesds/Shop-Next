@@ -10,6 +10,8 @@ export default function Document() {
       <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
 
       <style id='stitches' dangerouslySetInnerHTML={{__html: getCssText()}} />
+
+      <link rel="icon" type="image/svg+xml" href="/favicon_io/shop2.svg" />
       </Head>
       <body>
         <Main /> 
