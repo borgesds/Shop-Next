@@ -1,8 +1,7 @@
 import { stripe } from "@/src/lib/stripe"
 import { ImageContainer, ProductContainer, ProductDetails } from "@/src/styles/pages/product"
-import { GetStaticProps } from "next"
+import { GetStaticPaths, GetStaticProps } from "next"
 import Image from "next/image"
-import { useRouter } from "next/router"
 import Stripe from "stripe"
 
 interface ProductProps {
@@ -16,19 +15,18 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
-    const { query } = useRouter()
-
     return (
         <ProductContainer>
             <ImageContainer>
+                <Image src={product.imageUrl} width={520} height={480} alt=""/>
                 
             </ImageContainer>
 
             <ProductDetails>
-                <h1>Camiseta x</h1>
-                <span>R$ 79,90</span>
+                <h1>{product.name}</h1>
+                <span>{product.price}</span>
 
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex nulla quas accusamus, beatae quasi atque commodi laboriosam ipsam, vitae maxime, deserunt voluptas facilis magni debitis sit et odit quae? Quaerat?</p>
+                <p>{product.description}</p>
 
                 <button>
                     Comprar agora
@@ -36,6 +34,16 @@ export default function Product({ product }: ProductProps) {
             </ProductDetails>
         </ProductContainer>
     )
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+    // adicionar os produtos mais acessados ou comprados
+    return {
+        paths: [
+            {params: {id: 'prod_NJad81ZEvgJqr2'}}
+        ],
+        fallback: 'blocking',
+    }
 }
 
 export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ params }: any) => {
