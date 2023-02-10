@@ -2,7 +2,7 @@ import { stripe } from "@/src/lib/stripe";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    const priceId = ''
+    const priceId = 'price_1MYxSZER7CCFGmQv3IcbxqeP'
 
     const successUrl = `${process.env.NEXT_URL}/Success`
     const cancelUrl = `${process.env.NEXT_URL}/`
@@ -18,4 +18,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             }
         ]
     })
+
+    return res.status(201).json({checkoutUrl: checkoutSession.url,})
 }

@@ -1,5 +1,6 @@
 import { stripe } from "@/src/lib/stripe"
 import { ImageContainer, ProductContainer, ProductDetails } from "@/src/styles/pages/product"
+import axios from "axios"
 import { GetStaticPaths, GetStaticProps } from "next"
 import Image from "next/image"
 import Stripe from "stripe"
@@ -11,10 +12,27 @@ interface ProductProps {
       imageUrl: string
       price: string
       description: string
+      defaultPriceId: string
     }
 }
 
 export default function Product({ product }: ProductProps) {
+    async function handleBuyProduct() {
+        try {
+            const response = await axios.post('/api/checkout', {
+                priceId: product.defaultPriceId,
+            })
+
+            const { checkoutUrl } = response.data
+
+            // Estamos mandado para uma pagina externa
+            window.location.href = checkoutUrl
+
+        } catch (err) {
+            alert('Falha ao redirencionar ao checkout!!!')
+        }
+    }
+
     return (
         <ProductContainer>
             <ImageContainer>
@@ -28,7 +46,7 @@ export default function Product({ product }: ProductProps) {
 
                 <p>{product.description}</p>
 
-                <button>
+                <button onClick={handleBuyProduct}>
                     Comprar agora
                 </button>
             </ProductDetails>
@@ -68,6 +86,7 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({ para
                     currency: 'BRL'
                 }).format(price.unit_amount === null ? 0 : price.unit_amount / 100), // Preço do produto
                 description: product.description,
+                defaultPriceId: price.id,
             }
         },
         revalidate: 60 * 60 * 1, // 1 hora
