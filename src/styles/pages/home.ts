@@ -15,8 +15,9 @@ export const ArrowFromRight = styled('div', {
     gap: 8,
 
     marginLeft: 60,
+    paddingBottom: '1rem',
     fontSize: 'small',
-    color: '$green500',
+    color: '$green300',
 
 })
 
