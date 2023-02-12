@@ -4,13 +4,14 @@ import Head from "next/head"
 
 import { GetStaticProps } from "next"
 import Link from "next/link"
-import { HomeContainer, Product } from "../styles/pages/home"
+import { ArrowFromRight, HomeContainer, Product } from "../styles/pages/home"
 
 import { useKeenSlider } from "keen-slider/react"
 import 'keen-slider/keen-slider.min.css'
 
 import { stripe } from "../lib/stripe"
 import Stripe from "stripe"
+import { BiArrowFromRight } from "react-icons/bi";
 
 interface HomeProps {
   products: {
@@ -35,6 +36,11 @@ export default function Home({ products }: HomeProps) {
       <Head>
         <title>Home | iGUIS Shop</title>
       </Head>
+
+      <ArrowFromRight>
+        <BiArrowFromRight size={30} />
+        Click e arraste para o lado para ver mais produtos
+      </ArrowFromRight>
 
       <HomeContainer ref={sliderRef} className="keen-slider">
         {products.map(product => {
